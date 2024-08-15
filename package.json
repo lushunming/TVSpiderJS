@@ -7,18 +7,22 @@
     "directories": {
         "lib": "lib"
     },
-    "scripts": {},
+    "scripts": {
+        "build": " node ./copyDistToSdk.js"
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "axios": "^1.4.0",
         "crypto-js": "^4.2.0",
         "log4js": "^6.9.1",
+
         "qs": "^6.11.2",
         "tunnel": "^0.0.6"
     },
     "devDependencies": {
         "@types/node": "^20.1.5",
-        "uglify-js": "^3.17.4"
+        "uglify-js": "^3.17.4",
+        "mocha": "^10.7.3"
     }
 }
