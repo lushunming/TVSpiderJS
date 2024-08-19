@@ -8,7 +8,8 @@
         "lib": "lib"
     },
     "scripts": {
-        "build": " node ./copyDistToSdk.js"
+        "copy": " node ./copyDistToSdk.js",
+        "build": "rollup --config"
     },
     "author": "",
     "license": "ISC",
@@ -21,7 +22,9 @@
     },
     "devDependencies": {
         "@types/node": "^20.1.5",
-        "uglify-js": "^3.17.4",
-        "mocha": "^10.7.3"
+        "@wwa/rollup-plugin-terser": "^1.1.2",
+        "mocha": "^10.7.3",
+        "rollup": "^4.21.0",
+        "uglify-js": "^3.17.4"
     }
 }
