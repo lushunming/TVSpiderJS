@@ -40,7 +40,7 @@ function get_qp_name44(qp_type) {
 class Kankan70Spider extends Spider {
     constructor() {
         super();
-        this.siteUrl = "http://cqdb6.com";
+        this.siteUrl = "http://biquysw.com";
     }
 
     getName() {
@@ -242,9 +242,17 @@ class Kankan70Spider extends Spider {
         if (!_.isEmpty(html)) {
             let $ = load(html)
             this.vodDetail = await this.parseVodDetailFromDoc($)
-            let mather = /<script type="text\/javascript" src="http:\/\/test.gqyy8.com:8077\/ne2(.*?)"><\/script>/g.exec(html)
-            let js_url = "http://test.gqyy8.com:8077/ne2" + mather[1]
-            let js_str = await this.fetch(js_url, null, this.getHeader())
+            let js_str;
+            for(let script of  $("script")){
+                let src=$(script).attr('src');
+             let str=   id.split('/').filter(a=>Number.parseInt(a));
+                if(src&&src.indexOf(str[0])>-1){
+
+                     js_str = await this.fetch(src, null, this.getHeader())
+                }
+
+            }
+
             if (!_.isEmpty(js_str)) {
                 let playObject = this.paraseUrlObject(js_str)
                 this.vodDetail.vod_play_url = playObject["play_url"]
