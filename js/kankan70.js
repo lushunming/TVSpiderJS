@@ -104,7 +104,7 @@ class Kankan70Spider extends Spider {
         let vod_elements = $("a.li-hv")
         for (const vod_element of vod_elements) {
             let vodShort = new VodShort()
-            vodShort.vod_id = "/" + vod_element.attribs["href"]
+            vodShort.vod_id =  vod_element.attribs["href"]
             vodShort.vod_name = vod_element.attribs["title"]
             vodShort.vod_pic = $(vod_element).find("img")[0].attribs["data-original"]
             let remarkEle = $(vod_element).find("p.bz")[0]
@@ -245,7 +245,7 @@ class Kankan70Spider extends Spider {
             let js_str;
             for(let script of  $("script")){
                 let src=$(script).attr('src');
-             let str=   id.split('/').filter(a=>Number.parseInt(a));
+                 let str=   id.split('/')[2];
                 if(src&&src.indexOf(str[0])>-1){
 
                      js_str = await this.fetch(src, null, this.getHeader())

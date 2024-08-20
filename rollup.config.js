@@ -51,7 +51,7 @@ function getConfig(sourceDir, targetDir) {
     files.forEach(file => {
         const sourcePath = path.join(sourceDir, file);
         const targetPath = path.join(targetDir, file);
-        if (jsFiles.includes(file)) {
+        if (jsFiles.includes(file)&& !fs.existsSync(targetPath)) {
             list.push({
                 input: sourcePath, output: {
                     file: targetPath, format: 'es', plugins: [terser(),]
