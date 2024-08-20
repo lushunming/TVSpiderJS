@@ -15,7 +15,7 @@ import {Crypto} from "../lib/cat.js";
 class NewVisionSpider extends Spider {
     constructor() {
         super();
-        this.siteUrl = "https://www.6080yy3.com"
+        this.siteUrl = "https://www.6wyy.com"
     }
 
     getAppName() {
@@ -80,14 +80,13 @@ class NewVisionSpider extends Spider {
         let vod_list = [];
         for (const item of items) {
             let vodShort = new VodShort()
-            let oneA = $(item).find('.module-item-cover .module-item-pic a').first();
-            vodShort.vod_id = oneA.attr('href');
-            vodShort.vod_name = oneA.attr('title');
-            vodShort.vod_pic = $(item).find('.module-item-cover .module-item-pic img').first().attr('data-src');
+            vodShort.vod_id = $(item).attr('href');
+            vodShort.vod_name = $(item).attr('title');
+            vodShort.vod_pic = $(item).find('img').first().attr('data-original');
             if (vodShort.vod_pic.indexOf("img.php?url=") > 0) {
                 vodShort.vod_pic = vodShort.vod_pic.split("img.php?url=")[1]
             }
-            vodShort.vod_remarks = $(item).find('.module-item-text').first().text();
+            vodShort.vod_remarks = $(item).find('.module-item-note').first().text();
             vod_list.push(vodShort)
         }
         return vod_list
@@ -172,7 +171,7 @@ class NewVisionSpider extends Spider {
         if (extend["时间排序"] !== undefined && extend["时间排序"] !== "0") {
             urlParams[type_key_list[3]] = extend["时间排序"]
         }
-        let reqUrl = this.siteUrl + '/index.php/vodshow/' + urlParams.join("-") + '.html';
+        let reqUrl = this.siteUrl + '/vodshow/' + urlParams.join("-") + '.html';
         let $ = await this.getHtml(reqUrl)
         this.vodList = await this.parseVodShortListFromDoc($)
     }
