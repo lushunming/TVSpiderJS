@@ -37,29 +37,70 @@ class JpyySpider extends Spider {
 
     async parseVodShortListFromDoc($) {
         let vod_list = []
-        let vod_elements = $("div.content-card > a")
-        for (const vod_element of vod_elements) {
+        let json = {}
+        for (const script of $("script")) {
+            if ($(script).text().indexOf("操作成功") > -1) {
+                json = JSON.parse(eval($(script).text().replaceAll('self.__next_f.push(', '').replaceAll(')', ''))[1].replaceAll("6:", ''))
+            }
+        }
+        let vodJson = json[3].children[3].data;
+        for (const dt in vodJson.data) {
+
+            for (const vod_element of vodJson.data[dt].list) {
+                let vodShort = new VodShort()
+                vodShort.vod_id = vod_element.vodId
+                vodShort.vod_name = vod_element.vodName
+                vodShort.vod_pic = vod_element.vodPic
+                vodShort.vod_remarks = vod_element.vodVersion
+                vod_list.push(vodShort)
+            }
+        }
+
+
+        return vod_list
+    }
+
+    async parseVodShortListFromDocByCategory($) {
+        let vod_list = []
+        let json = {}
+        for (const script of $("script")) {
+            if ($(script).text().indexOf("操作成功") > -1) {
+                json = JSON.parse(eval($(script).text().replaceAll('self.__next_f.push(', '').replaceAll(')', ''))[1].replaceAll("6:", ''))
+            }
+        }
+        let vodJson = json[3]['videoList'].data;
+
+        for (const vod_element of vodJson.list) {
             let vodShort = new VodShort()
-            vodShort.vod_id = vod_element.attribs["href"]
-            vodShort.vod_name = $(vod_element).find("div.card-info ").find('div.title').text()
-            vodShort.vod_pic = decodeURIComponent($(vod_element).find("img")[0].attribs["srcset"].split(',')[0]).replace("/_next/image?url=","")
-            vodShort.vod_remarks = $($(vod_element).find("div.score").first()).text()
+            vodShort.vod_id = vod_element.vodId
+            vodShort.vod_name = vod_element.vodName
+            vodShort.vod_pic = vod_element.vodPic
+            vodShort.vod_remarks = vod_element.vodVersion
             vod_list.push(vodShort)
         }
         return vod_list
     }
 
     async parseVodDetailFromDoc($) {
+        let json = {}
+        for (const script of $("script")) {
+            if ($(script).text().indexOf("操作成功") > -1) {
+                json = JSON.parse(eval($(script).text().replaceAll('self.__next_f.push(', '').replaceAll(')', ''))[1].replaceAll("6:", ''))
+            }
+        }
+        let vodJson = json[3].data.data;
+
         let vodDetail = new VodDetail()
 
-        vodDetail.vod_name = $("h1.title").text()
-        vodDetail.vod_remarks = $("div.tags > a.tag").text()
-
-        vodDetail.vod_area = ""
-        vodDetail.vod_year = ""
-        vodDetail.type_name = ""
-        vodDetail.vod_content = $("div.intro").text()
-        vodDetail.vod_pic =decodeURIComponent((  $("img")[0].attribs["srcset"].split(',')[0])).replace("/_next/image?url=","")
+        vodDetail.vod_name = vodJson.vodName
+        vodDetail.vod_remarks = vodJson.vodRemarks
+        vodDetail.vod_area = vodJson.vodArea
+        vodDetail.vod_year = vodJson.vodYear
+        vodDetail.type_name = vodJson.vodName
+        vodDetail.vod_content = vodJson.vodBlurb
+        vodDetail.vod_pic = vodJson.vodPic
+        vodDetail.vod_actor = vodJson.vodActor
+        vodDetail.vod_director= vodJson.vodDirector
 
         return vodDetail
     }
@@ -154,7 +195,7 @@ class JpyySpider extends Spider {
             let cate_html = await this.fetch(url, {}, this.getHeader())
             if (!_.isEmpty(cate_html)) {
                 let $ = load(cate_html)
-                this.vodList = await this.parseVodShortListFromDoc($)
+                this.vodList = await this.parseVodShortListFromDocByCategory($)
             }
 
         }
