@@ -42,7 +42,7 @@ class JpyySpider extends Spider {
             let vodShort = new VodShort()
             vodShort.vod_id = vod_element.attribs["href"]
             vodShort.vod_name = $(vod_element).find("div.card-info ").find('div.title').text()
-            vodShort.vod_pic = this.baseProxy + Utils.base64Encode(this.siteUrl + $(vod_element).find("img")[0].attribs["srcset"].split(',')[0])
+            vodShort.vod_pic = decodeURIComponent($(vod_element).find("img")[0].attribs["srcset"].split(',')[0]).replace("/_next/image?url=","")
             vodShort.vod_remarks = $($(vod_element).find("div.score").first()).text()
             vod_list.push(vodShort)
         }
@@ -59,7 +59,7 @@ class JpyySpider extends Spider {
         vodDetail.vod_year = ""
         vodDetail.type_name = ""
         vodDetail.vod_content = $("div.intro").text()
-        vodDetail.vod_pic =this.baseProxy + Utils.base64Encode( this.siteUrl + $("img")[0].attribs["srcset"].split(',')[0])
+        vodDetail.vod_pic =decodeURIComponent((  $("img")[0].attribs["srcset"].split(',')[0])).replace("/_next/image?url=","")
 
         return vodDetail
     }
