@@ -9,7 +9,6 @@
 import {_, Crypto, load} from "../lib/cat.js";
 import {VodDetail, VodShort} from "../lib/vod.js";
 import {Spider} from "./spider.js";
-import * as Utils from "../lib/utils.js";
 
 
 class JpyySpider extends Spider {
@@ -71,15 +70,14 @@ class JpyySpider extends Spider {
         let vodJson = json[3].data.data.result;
 
 
-            for (const vod_element of vodJson.list) {
-                let vodShort = new VodShort()
-                vodShort.vod_id = vod_element.vodId
-                vodShort.vod_name = vod_element.vodName
-                vodShort.vod_pic = vod_element.vodPic
-                vodShort.vod_remarks = vod_element.vodVersion
-                vod_list.push(vodShort)
-            }
-
+        for (const vod_element of vodJson.list) {
+            let vodShort = new VodShort()
+            vodShort.vod_id = vod_element.vodId
+            vodShort.vod_name = vod_element.vodName
+            vodShort.vod_pic = vod_element.vodPic
+            vodShort.vod_remarks = vod_element.vodVersion
+            vod_list.push(vodShort)
+        }
 
 
         return vod_list
@@ -126,7 +124,7 @@ class JpyySpider extends Spider {
         vodDetail.vod_content = vodJson.vodBlurb
         vodDetail.vod_pic = vodJson.vodPic
         vodDetail.vod_actor = vodJson.vodActor
-        vodDetail.vod_director= vodJson.vodDirector
+        vodDetail.vod_director = vodJson.vodDirector
 
         return vodDetail
     }
@@ -229,7 +227,7 @@ class JpyySpider extends Spider {
     }
 
     async setDetail(id) {
-        let detailUrl = this.siteUrl +'/detail/'+ id
+        let detailUrl = this.siteUrl + '/detail/' + id
         let html = await this.fetch(detailUrl, null, this.getHeader())
         if (!_.isEmpty(html)) {
             let $ = load(html)
