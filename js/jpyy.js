@@ -9,6 +9,7 @@
 import {_, Crypto, load} from "../lib/cat.js";
 import {VodDetail, VodShort} from "../lib/vod.js";
 import {Spider} from "./spider.js";
+import * as Utils from "../lib/utils.js";
 
 
 class JpyySpider extends Spider {
@@ -41,7 +42,8 @@ class JpyySpider extends Spider {
             let vodShort = new VodShort()
             vodShort.vod_id = vod_element.attribs["href"]
             vodShort.vod_name = $(vod_element).find("div.card-info ").find('div.title').text()
-            vodShort.vod_pic = this.siteUrl + $(vod_element).find("img")[0].attribs["srcset"]
+            vodShort.vod_pic = this.baseProxy + Utils.base64Encode(this.siteUrl + $(vod_element).find("img")[0].attribs["srcset"])
+
             vodShort.vod_remarks = $($(vod_element).find("div.score").first()).text()
             vod_list.push(vodShort)
         }
@@ -58,7 +60,7 @@ class JpyySpider extends Spider {
         vodDetail.vod_year = ""
         vodDetail.type_name = ""
         vodDetail.vod_content = $("div.intro").text()
-        vodDetail.vod_pic = this.siteUrl + $("img")[0].attribs["srcset"]
+        vodDetail.vod_pic = this.baseProxy + Utils.base64Encode(this.siteUrl + $("img")[0].attribs["srcset"])
 
         return vodDetail
     }
