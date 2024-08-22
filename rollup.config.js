@@ -1,7 +1,8 @@
-import {terser} from "@wwa/rollup-plugin-terser";
 import fs from 'node:fs'
 import path from 'node:path'
 import {fileURLToPath} from "node:url";
+import terser from '@rollup/plugin-terser';
+
 /*
 *
  * newvision.js
@@ -54,7 +55,7 @@ function getConfig(sourceDir, targetDir) {
         if (jsFiles.includes(file) && !fs.existsSync(targetPath)) {
             list.push({
                 input: sourcePath, output: {
-                    file: targetPath, format: 'es', plugins: [terser(),]
+                    file: targetPath, format: 'es', plugins: [terser({toplevel:true})]
                 },
 
             });

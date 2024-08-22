@@ -21,8 +21,8 @@
         "tunnel": "^0.0.6"
     },
     "devDependencies": {
+        "@rollup/plugin-terser": "^0.4.4",
         "@types/node": "^20.1.5",
-        "@wwa/rollup-plugin-terser": "^1.1.2",
         "mocha": "^10.7.3",
         "rollup": "^4.21.0",
         "uglify-js": "^3.17.4"
