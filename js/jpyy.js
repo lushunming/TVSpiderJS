@@ -60,6 +60,32 @@ class JpyySpider extends Spider {
         return vod_list
     }
 
+    async parseSearchFromDoc($) {
+        let vod_list = []
+        let json = {}
+        for (const script of $("script")) {
+            if ($(script).text().indexOf("操作成功") > -1) {
+                json = JSON.parse(eval($(script).text().replaceAll('self.__next_f.push(', '').replaceAll(')', ''))[1].replaceAll("6:", ''))
+            }
+        }
+        let vodJson = json[3].data.data.result;
+
+
+            for (const vod_element of vodJson.list) {
+                let vodShort = new VodShort()
+                vodShort.vod_id = vod_element.vodId
+                vodShort.vod_name = vod_element.vodName
+                vodShort.vod_pic = vod_element.vodPic
+                vodShort.vod_remarks = vod_element.vodVersion
+                vod_list.push(vodShort)
+            }
+
+
+
+        return vod_list
+    }
+
+
     async parseVodShortListFromDocByCategory($) {
         let vod_list = []
         let json = {}
@@ -203,7 +229,7 @@ class JpyySpider extends Spider {
     }
 
     async setDetail(id) {
-        let detailUrl = this.siteUrl + id
+        let detailUrl = this.siteUrl +'/detail/'+ id
         let html = await this.fetch(detailUrl, null, this.getHeader())
         if (!_.isEmpty(html)) {
             let $ = load(html)
@@ -250,7 +276,7 @@ class JpyySpider extends Spider {
 
             let $ = load(html)
 
-            this.vodList = await this.parseVodShortListFromDoc($)
+            this.vodList = await this.parseSearchFromDoc($)
 
         }
     }

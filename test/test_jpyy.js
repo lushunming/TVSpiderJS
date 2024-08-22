@@ -41,7 +41,7 @@ describe('jpyy', function () {
     });
 
     it('detail', async function () {
-        console.log(JSON.stringify(JSON.parse(await spider.detail("/detail/83882")), null, 2));
+        console.log(JSON.stringify(JSON.parse(await spider.detail("83882")), null, 2));
     });
 
     describe('#play', function () {
