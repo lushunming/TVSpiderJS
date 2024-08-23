@@ -42,7 +42,7 @@ let list = [];
 const jsFiles = ['jpyy.js','newvision.js', 'kankan70.js', 'tiantian.js', 'xb6v.js', 'mp4movie.js', 'jianpian.js', 'alipansou.js', 'huya.js', 'star.js', 'nivod.js', 'aiyingshi.js', 'sp360.js', 'mxanime.js', 'cntv.js', 'douban.js', 'pan_search.js', 'bilibili.js', 'changzhang.js', 'wogg.js', 'nangua.js', 'aliyunpanshare.js', 'dubo.js', 'haiwaikan.js', 'dygangs.js', 'cilixiong.js', 'lovemovie.js', 'gitcafe.js', 'kuaikan.js',];
 
 const sourceFolder = path.join(__dirname, '/js');
-const targetFolder_js = path.join(process.cwd(), '..', 'json/js');
+const targetFolder_js = path.join(__dirname, '/dist');
 
 function getConfig(sourceDir, targetDir) {
     // 读取源文件夹中的文件列表
