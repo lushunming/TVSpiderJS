@@ -26,6 +26,9 @@
         "mocha": "^10.7.3",
         "node-cmd": "^5.0.0",
         "rollup": "^4.21.0",
+        "rollup-plugin-clear": "^2.0.7",
+        "rollup-plugin-delete": "^2.0.0",
+        "rollup-plugin-uglify": "^6.0.4",
         "uglify-js": "^3.17.4"
     }
 }
