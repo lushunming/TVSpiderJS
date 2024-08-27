@@ -66,9 +66,11 @@ class JianPianSpider extends Spider {
             let vodShort = new VodShort();
             vodShort.vod_id = data["id"]
             if (data["path"] !== undefined) {
-                vodShort.vod_pic = this.jsBase + Utils.base64Encode(data["path"])
+             //   vodShort.vod_pic = this.jsBase + Utils.base64Encode(data["path"])
+                vodShort.vod_pic = data["path"]
             } else {
-                vodShort.vod_pic = this.jsBase + Utils.base64Encode(data["thumbnail"])
+                //vodShort.vod_pic = this.jsBase + Utils.base64Encode(data["thumbnail"])
+                vodShort.vod_pic = data["thumbnail"]
             }
             vodShort.vod_name = data["title"]
             if (data["mask"] !== undefined){
@@ -97,7 +99,7 @@ class JianPianSpider extends Spider {
         if (!this.catOpenStatus) {
             vodDetail.vod_pic = obj["thumbnail"] + "@Referer=www.jianpianapp.com@User-Agent=jianpian-version353@JPAUTH=y261ow7kF2dtzlxh1GS9EB8nbTxNmaK/QQIAjctlKiEv"
         } else {
-            vodDetail.vod_pic = this.jsBase + Utils.base64Encode(obj["thumbnail"])
+            vodDetail.vod_pic = obj["thumbnail"]
         }
         vodDetail.type_name = obj["category"][0]["title"]
         vodDetail.vod_name = obj["title"]
