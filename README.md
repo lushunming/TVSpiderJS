@@ -1,4 +1,5 @@
-# CatVodOpen和TvBox
+# TvBox android only 
+
 
 ## 食用前阅读
 &ensp;&ensp;授人以鱼不如授人以渔，本仓意指在教会大家学会Spider，也欢迎大家提ISSUE，一起学习一起进步。<br>
@@ -15,46 +16,14 @@
 ## TVBox互联网发布地址
 [TV发布地址](https://github.com/FongMi/Release/tree/main/apk/release)
 ```bash
-https://gh.con.sh/https://raw.githubusercontent.com/jadehh/TVSpider/js/tv_config.json
+https://androidcatvodspider.pages.dev/json/index.json
 ```
-> 配置信息见js分支分支
 
 
-## CatVodOpen
-[CatVodOpen发布地址](https://github.com/catvod/CatVodOpen/releases)
-
-> 注意使用Gitee或Github导入，并设置为私有仓库，<font color="red">CatVodOpen仅支持私有仓库</font>
-
-V1.1.3版本以上
-```bash
-gitee://Token@gitee.com/jadehh_743/TVSpider/dist/index.js.md5
-```
-<font color="red">**改动**</font>
-
-* quickjs改为nodejs，proxy设置修改
-* 在ios上无法使用local，使用db替换local所有方法
-* nodejs 的优势在于更加灵活
-> 配置信息见dist分支
-
-V1.1.2版本以下
-```bash
-gitee://Token@gitee.com/jadehh_743/TVSpider/js/open_config.json
-```
-> 配置信息见js分支分支
 
 
-## config文件生成
-```bash
-python build.py --aliToken aliToken
-```
-> Token如果失效,需要重新获取阿里Token 
->
-> [阿里Token获取](https://alist.nn.ci/zh/guide/drivers/aliyundrive.html)
->
-> nodejs 部分只生成代码，需要手动build，区分18+
 
-## 直播源生成
-> 见[jadehh/LiveSpider](https://github.com/jadehh/LiveSpider)
+
 
 
 ## 遇到的问题
@@ -75,10 +44,10 @@ python build.py --aliToken aliToken
   
 ## ✨ Star 数
 
-[![Star History Chart](https://api.star-history.com/svg?repos=jadehh/TVSpider&type=Date)](https://star-history.com/#jadehh/TVSpider&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=lushunming/TVSpiderJS&type=Date](https://star-history.com/#jadehh/TVSpider&Date)
 ---
 
 ## 赞助
 如果觉得此项目有用，可以考虑赞助我喝杯咖啡，感谢star❤
 
-<img src="./resources/wechat.jpg" alt="微信" width="256" height="256" align="left" />
+## based https://github.com/jadehh/TVSpider ,在此感谢作者的贡献
