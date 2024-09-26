@@ -44,7 +44,7 @@ https://androidcatvodspider.pages.dev/json/index.json
   
 ## ✨ Star 数
 
-[![Star History Chart](https://api.star-history.com/svg?repos=lushunming/TVSpiderJS&type=Date](https://star-history.com/#jadehh/TVSpider&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=lushunming/TVSpiderJS&type=Date)](https://star-history.com/#lushunming/TVSpiderJS&Date)
 ---
 
 ## 赞助
